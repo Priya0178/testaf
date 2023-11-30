@@ -189,9 +189,7 @@ async def google_search(text):
         return []
     soup = BeautifulSoup(response.text, 'html.parser')
     titles = soup.find_all( 'h3' )
-    rs = [title.get_text(strip=True) for title in titles][:5]
-    logging.info(rs)
-    return rs
+    return [title.get_text(strip=True) for title in titles]
 
 
 async def get_settings(group_id):
