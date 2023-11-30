@@ -189,7 +189,7 @@ async def google_search(text):
         return []
     soup = BeautifulSoup(response.text, 'html.parser')
     titles = soup.find_all( 'h3' )
-    rs = [title.getText() for title in titles[:5]]
+    rs = [title.get_text(strip=True) for title in titles][:5]
     logging.info(rs)
     return rs
 
