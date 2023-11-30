@@ -198,7 +198,6 @@ async def advantage_spoll_choker(bot: Client, update: CallbackQuery):
 I am sending your request to my owner
 
 Go to Google and check your spelling... 👇**""",
-            quote=True,
             reply_markup=InlineKeyboardMarkup(btnz)
         )
             seconds = await get_config("DELETE_TIME", DELETE_TIME)
