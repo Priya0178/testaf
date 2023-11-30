@@ -368,10 +368,10 @@ async def advance_spell_check(msg):
             mal(ayalam)?|t(h)?amil|file|that|find|und(o)*|kit(t(i|y)?)?o(w)?|\
             thar(u)?(o)*w?|kittum(o)*|aya(k)*(um(o)*)?|full\smovie|any(one)|\
             with\ssubtitle(s)?)",
-        "", msg.text, flags=re.IGNORECASE)  # plis contribute some common words
+        "", msg.text, flags=re.IGNORECASE) 
 
     query = query.strip() + " movie"
-    result = await google_search(query)
+    result = await google_search(query)[:5]
     logging.info(result)
     #result = []
     result_parsed = []
