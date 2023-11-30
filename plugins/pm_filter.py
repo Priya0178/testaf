@@ -190,8 +190,9 @@ async def advantage_spoll_choker(bot: Client, update: CallbackQuery):
             k = (movie, files, len(files))
             await auto_filter(bot, update, k)
         else:
-            btnz = [InlineKeyboardButton('🔎  SEARCH ON GOOGLE 🔍', url=f'https://google.com/search?q={movie}') 
-               ]
+            btnz = [
+    InlineKeyboardButton(text="🔎 SEARCH ON GOOGLE 🔍", url=f'https://google.com/search?q={movie}')
+]
             k = await bot.send_message(
             chat_id = update.from_user.id,
             text="""**The movie not found in my database
