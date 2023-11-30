@@ -375,6 +375,7 @@ async def advance_spell_check(msg):
     result = []
     for i in rt[:5]:
         result.append(i)
+        logging.info(i)
     result_parsed = []
 
     if not result:
