@@ -383,7 +383,7 @@ async def advance_spell_check(msg):
         return
 
     regex = re.compile(r".*(imdb|wikipedia).*", re.IGNORECASE)  # look for imdb / wiki results
-    gs = list(filter(regex.match, result))[:5]
+    gs = list(filter(regex.match, result))
 
     result_parsed = [re.sub(
         r'\b(\-([a-zA-Z-\s])\-\simdb|(\-\s)?imdb|(\-\s)?wikipedia|\(|\)|\-|reviews|full|all|episode(s)?|film|movie|series)',
