@@ -371,8 +371,10 @@ async def advance_spell_check(msg):
         "", msg.text, flags=re.IGNORECASE) 
 
     query = query.strip() + " movie"
-    result = await google_search(query)
-    result = result[:5]
+    rt = await google_search(query)
+    result = []
+    for i in rt[:5]:
+        result.append(i)
     result_parsed = []
 
     if not result:
