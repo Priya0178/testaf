@@ -4,7 +4,7 @@ import re
 import os
 import pyrogram # for manual filter
 from sys import executable
-
+from urllib.parse import quote
 from datetime import datetime, timedelta
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
@@ -190,11 +190,10 @@ async def advantage_spoll_choker(bot: Client, update: CallbackQuery):
             k = (movie, files, len(files))
             await auto_filter(bot, update, k)
         else:
-            logging.info(movie)
             btnz = [[
-    InlineKeyboardButton(text="🔎 SEARCH ON GOOGLE 🔍", url=f'https://google.com/search?q={k}')
+    InlineKeyboardButton(text="🔎 SEARCH ON GOOGLE 🔍", url=f'https://google.com/search?q={quote(movie)}')
 ]]
-            k = await bot.send_message(
+            k = await update.message.edit(
             chat_id = update.from_user.id,
             text="""**The movie not found in my database
 
