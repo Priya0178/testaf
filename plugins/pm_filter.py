@@ -427,7 +427,7 @@ Go to Google and check your spelling... 👇**""",
     movielist = list(dict.fromkeys(movielist))  # removing duplicates
 
     if not movielist:
-        btnz = [InlineKeyboardButton('🔎  SEARCH ON GOOGLE 🔍', url=f'https://google.com/search?q={query}') 
+        btnz = [InlineKeyboardButton(text='🔎  SEARCH ON GOOGLE 🔍', url=f'https://google.com/search?q={query}') 
                ]
         k = await msg.reply(
             text="""**The movie not found in my database
