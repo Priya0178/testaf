@@ -190,7 +190,17 @@ async def advantage_spoll_choker(bot: Client, update: CallbackQuery):
             k = (movie, files, len(files))
             await auto_filter(bot, update, k)
         else:
-            k = await update.message.edit('Movie not found')
+            btnz = [InlineKeyboardButton('🔎  SEARCH ON GOOGLE 🔍', url=f'https://google.com/search?q={query}') 
+               ]
+        k = await update.message.edit(
+            text="""**The movie not found in my database
+
+I am sending your request to my owner
+
+Go to Google and check your spelling... 👇**""",
+            quote=True,
+            reply_markup=InlineKeyboardMarkup(btnz)
+        )
             seconds = await get_config("DELETE_TIME", DELETE_TIME)
             scheduler.add_job(k.delete, 'date', run_date=datetime.now() + timedelta(seconds=seconds))
 
