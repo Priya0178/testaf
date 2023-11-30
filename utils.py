@@ -193,6 +193,7 @@ async def google_search(text):
     for i, title in enumerate(titles):
         if i < 5:
             rstp.append(title.get_text(strip=True))
+    logging.info(rstp)
     return rstp
 
 
