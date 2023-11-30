@@ -181,7 +181,8 @@ async def google_search(text):
     text = text.replace(" ", '+')
     url = f'https://www.google.com/search?q={text}'
     try:
-        response = await requests.get(url, headers=usr_agent)
+        response = requests.get(url, headers=usr_agent)
+        logging.info(response.text)
         if response.status_code != 200:
             return []
     except Exception as e:
