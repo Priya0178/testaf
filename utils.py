@@ -173,7 +173,7 @@ async def broadcast_messages(user_id, message):
     except Exception as e:
         return False, "Error"
 
-def google_search(text):
+async def google_search(text):
     usr_agent = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
         'Chrome/61.0.3163.100 Safari/537.36'
@@ -181,13 +181,13 @@ def google_search(text):
     text = text.replace(" ", '+')
     url = f'https://www.google.com/search?q={text}'
     try:
-        response = requests.get(url, headers=usr_agent)
+        response = await requests.get(url, headers=usr_agent)
         if response.status_code != 200:
             return []
     except Exception as e:
         logging.error(str(e), exc_info=False)
         return []
-    soup = BeautifulSoup(response.text, 'html.parser')
+    soup = await BeautifulSoup(response.text, 'html.parser')
     titles = soup.find_all( 'h3' )
     return [title.getText() for title in titles]
 
