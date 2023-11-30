@@ -372,6 +372,7 @@ async def advance_spell_check(msg):
 
     query = query.strip() + " movie"
     result = await google_search(query)
+    logging.info(result)
     #result = []
     result_parsed = []
 
