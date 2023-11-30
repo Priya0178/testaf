@@ -371,11 +371,7 @@ async def advance_spell_check(msg):
         "", msg.text, flags=re.IGNORECASE) 
 
     query = query.strip() + " movie"
-    rt = await google_search(query)
-    result = []
-    for i in rt[:5]:
-        result.append(i)
-        logging.info(i)
+    result = await google_search(query)
     result_parsed = []
 
     if not result:
@@ -387,7 +383,7 @@ async def advance_spell_check(msg):
         return
 
     regex = re.compile(r".*(imdb|wikipedia).*", re.IGNORECASE)  # look for imdb / wiki results
-    gs = list(filter(regex.match, result))
+    gs = list(filter(regex.match, result))[:5]
 
     result_parsed = [re.sub(
         r'\b(\-([a-zA-Z-\s])\-\simdb|(\-\s)?imdb|(\-\s)?wikipedia|\(|\)|\-|reviews|full|all|episode(s)?|film|movie|series)',
