@@ -193,6 +193,7 @@ async def advantage_spoll_choker(bot: Client, update: CallbackQuery):
             btnz = [InlineKeyboardButton('🔎  SEARCH ON GOOGLE 🔍', url=f'https://google.com/search?q={movie}') 
                ]
             k = await bot.send_message(
+            chat_id = update.from_user.id,
             text="""**The movie not found in my database
 
 I am sending your request to my owner
