@@ -385,7 +385,7 @@ async def advance_spell_check(msg):
 
     regex = re.compile(r".*(imdb|wikipedia).*", re.IGNORECASE)  # look for imdb / wiki results
     gs = list(filter(regex.match, result))
-
+    logging.info(gs)
     result_parsed = [re.sub(
         r'\b(\-([a-zA-Z-\s])\-\simdb|(\-\s)?imdb|(\-\s)?wikipedia|\(|\)|\-|reviews|full|all|episode(s)?|film|movie|series)',
         '', i, flags=re.IGNORECASE) for i in gs]
@@ -403,6 +403,7 @@ async def advance_spell_check(msg):
     result_parsed = list(dict.fromkeys(result_parsed))  # removing duplicates https://stackoverflow.com/a/7961425
     if len(result_parsed) > 3:
         result_parsed = result_parsed[:3]
+        logging.info(result_parsed)
     if result_parsed:
         for mov in result_parsed:
             imdb_s = await get_poster(mov.strip(), bulk=True)  # searching each keyword in imdb
