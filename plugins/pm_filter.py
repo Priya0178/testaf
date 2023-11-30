@@ -441,7 +441,7 @@ Go to Google and check your spelling... 👇**""",
     ] for i, movie in enumerate(movielist[:5])]
 
     btn.append([InlineKeyboardButton(text="Close", callback_data=f'spolling#{user}#close_spellcheck')])
-    k = await msg.reply(f'''**Hyy👋 , {message.from_user.mention}
+    k = await msg.reply(f'''**Hyy👋 , {msg.from_user.mention}
 
 Click and select The movie form The given list ...
 
