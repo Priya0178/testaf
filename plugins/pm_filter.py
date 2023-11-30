@@ -371,8 +371,8 @@ async def advance_spell_check(msg):
         "", msg.text, flags=re.IGNORECASE)  # plis contribute some common words
 
     query = query.strip() + " movie"
-    # result = google_search(query)
-    result = []
+    result = google_search(query)
+    #result = []
     result_parsed = []
 
     if not result:
