@@ -182,14 +182,14 @@ async def google_search(text):
     url = f'https://www.google.com/search?q={text}'
     try:
         response = requests.get(url, headers=usr_agent)
-        logging.info(response.text)
         if response.status_code != 200:
             return []
     except Exception as e:
         logging.error(str(e), exc_info=False)
         return []
-    soup = await BeautifulSoup(response.text, 'html.parser')
+    soup = BeautifulSoup(response.text, 'html.parser')
     titles = soup.find_all( 'h3' )
+    logging.info(titles)
     return [title.getText() for title in titles]
 
 
