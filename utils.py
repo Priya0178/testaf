@@ -189,7 +189,11 @@ async def google_search(text):
         return []
     soup = BeautifulSoup(response.text, 'html.parser')
     titles = soup.find_all( 'h3' )
-    return [title.get_text(strip=True) for title in titles[:4]]
+    rstp = []
+    for i, title in enumerate(titles):
+        if i < 5:
+            rstp.append(title.get_text(strip=True))
+    return rstp
 
 
 async def get_settings(group_id):
