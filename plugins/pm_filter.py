@@ -375,9 +375,16 @@ async def advance_spell_check(msg):
     result_parsed = []
 
     if not result:
+        btnz = [InlineKeyboardButton('🔎  SEARCH ON GOOGLE 🔍', url=f'https://google.com/search?q={query}') 
+               ]
         k = await msg.reply(
-            text="<b>●I could not find the file you requested😕</b>\n\n<b>● Is the movie you asked about released OTT..?</b>\n\n<U>● Pay attention to the following…</U>\n\n<b>● Ask for correct spelling.</b>\n\n<b>● Do not ask for movies that are not released on OTT platforms.</b>\n\n<b>● Also ask [movie name, language] like this..‌‌</b>.",
+            text="""**The movie not found in my database
+
+I am sending your request to my owner
+
+Go to Google and check your spelling... 👇**""",
             quote=True,
+            reply_markup=InlineKeyboardMarkup(btnz))
         )
         scheduler.add_job(k.delete, 'date', run_date=datetime.now() + timedelta(seconds=60),misfire_grace_time=60)
         return
@@ -411,9 +418,16 @@ async def advance_spell_check(msg):
     movielist = list(dict.fromkeys(movielist))  # removing duplicates
 
     if not movielist:
+        btnz = [InlineKeyboardButton('🔎  SEARCH ON GOOGLE 🔍', url=f'https://google.com/search?q={query}') 
+               ]
         k = await msg.reply(
-            text="I couldn't find anything related to that. Check your spelling",
+            text="""**The movie not found in my database
+
+I am sending your request to my owner
+
+Go to Google and check your spelling... 👇**""",
             quote=True,
+            reply_markup=InlineKeyboardMarkup(btnz))
         )
         scheduler.add_job(k.delete, 'date', run_date=datetime.now() + timedelta(seconds=8),misfire_grace_time=60)
         return
@@ -427,7 +441,12 @@ async def advance_spell_check(msg):
     ] for i, movie in enumerate(movielist[:5])]
 
     btn.append([InlineKeyboardButton(text="Close", callback_data=f'spolling#{user}#close_spellcheck')])
-    k = await msg.reply("I couldn't find anything related to that\nDid you mean any one of these?", True,
+    k = await msg.reply(f'''**Hyy👋 , {message.from_user.mention}
+
+Click and select The movie form The given list ...
+
+दी गई सूची में अपनी सही मूवी का नाम चुने...**
+''', quote=True,
                     reply_markup=InlineKeyboardMarkup(btn))
     scheduler.add_job(k.delete, 'date', run_date=datetime.now() + timedelta(seconds=60),misfire_grace_time=60)
 
