@@ -244,7 +244,7 @@ async def auto_filter(client, msg: Message, spoll=False):
             files = files[:max_results]
             if not files:
                 if settings["spell_check"]:
-                    return await advance_spell_check(msg)
+                    return asyncio.run(advance_spell_check(msg))
                 else:
                     return
         
@@ -577,6 +577,6 @@ def auto_restart():
     os.execl(executable,executable,"bot.py")
 
 
-# scheduler.add_job(auto_restart,'interval', hours=10)
+scheduler.add_job(auto_restart,'interval', hours=10)
 
 scheduler.start()
