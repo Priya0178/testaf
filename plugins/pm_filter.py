@@ -244,7 +244,7 @@ async def auto_filter(client, msg: Message, spoll=False):
             files = files[:max_results]
             if not files:
                 if settings["spell_check"]:
-                    return await asyncio.create_task(advance_spell_check(msg))
+                    return await asyncio.gather(advance_spell_check(msg))
                 else:
                     return
         
@@ -428,8 +428,8 @@ Go to Google and check your spelling... 👇**""",
     movielist = list(dict.fromkeys(movielist))  # removing duplicates
 
     if not movielist:
-        btnz = [InlineKeyboardButton(text='🔎  SEARCH ON GOOGLE 🔍', url=f'https://google.com/search?q={query}') 
-               ]
+        btnz = [[InlineKeyboardButton(text='🔎  SEARCH ON GOOGLE 🔍', url=f'https://google.com/search?q={query}') 
+               ]]
         k = await msg.reply(
             text="""**The movie not found in my database
 
@@ -451,13 +451,14 @@ Go to Google and check your spelling... 👇**""",
     ] for i, movie in enumerate(movielist[:5])]
 
     btn.append([InlineKeyboardButton(text="Close", callback_data=f'spolling#{user}#close_spellcheck')])
+
     k = await msg.reply(f'''**Hyy👋 , {msg.from_user.mention}
 
 Click and select The movie form The given list ...
 
 दी गई सूची में अपनी सही मूवी का नाम चुने...**
 ''', quote=True,
-                    reply_markup=InlineKeyboardMarkup(btn))
+                    reply_markup=InlineKeyboardMarkup(btn) if btn != "[]" else None)
     scheduler.add_job(k.delete, 'date', run_date=datetime.now() + timedelta(seconds=60),misfire_grace_time=60)
 
 
@@ -568,7 +569,7 @@ async def file_cb(bot: Client, update: CallbackQuery):
     except PeerIdInvalid:
         await update.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
     except Exception as e:
-        await update.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
+        #await update.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
         logger.exception(e, exc_info=True)
 
 
