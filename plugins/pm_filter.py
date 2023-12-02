@@ -381,7 +381,7 @@ async def advance_spell_check(msg):
         "", msg.text, flags=re.IGNORECASE) 
 
     query = query.strip() + " movie"
-    result = asyncio.create_task(google_search(query))
+    result = await asyncio.create_task(google_search(query))
     result_parsed = []
 
     if not result:
