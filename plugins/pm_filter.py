@@ -244,7 +244,7 @@ async def auto_filter(client, msg: Message, spoll=False):
             files = files[:max_results]
             if not files:
                 if settings["spell_check"]:
-                    return await asyncio.gather(advance_spell_check(msg))
+                    return asyncio.create_task(advance_spell_check(msg))
                 else:
                     return
         
@@ -381,7 +381,7 @@ async def advance_spell_check(msg):
         "", msg.text, flags=re.IGNORECASE) 
 
     query = query.strip() + " movie"
-    result = await google_search(query)
+    result = asyncio.create_task(google_search(query))
     result_parsed = []
 
     if not result:
@@ -569,7 +569,7 @@ async def file_cb(bot: Client, update: CallbackQuery):
     except PeerIdInvalid:
         await update.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
     except Exception as e:
-        #await update.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
+        await update.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
         logger.exception(e, exc_info=True)
 
 
