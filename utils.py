@@ -1,4 +1,4 @@
-import requests
+import httpx
 import re
 import os
 import logging
@@ -181,7 +181,8 @@ async def google_search(text):
     text = text.replace(" ", '+')
     url = f'https://www.google.com/search?q={text}'
     try:
-        response = requests.get(url, headers=usr_agent)
+        async with httpx.AsyncClient() as client:
+            response = await client.get(url,headers=usr_agent)
         if response.status_code != 200:
             return []
     except Exception as e:
