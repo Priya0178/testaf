@@ -244,7 +244,7 @@ async def auto_filter(client, msg: Message, spoll=False):
             files = files[:max_results]
             if not files:
                 if settings["spell_check"]:
-                    return await asyncio.run(advance_spell_check(msg))
+                    return await asyncio.create_task(advance_spell_check(msg))
                 else:
                     return
         
